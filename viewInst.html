@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>{% block title %}REM View Installations{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+
+<div id="inslist">
+    {% for inst in inst %} 
+    
+    <div class="card">
+  
+        <h1> {{inst.inst_id}}  </h1>
+        <p class="title">Account ID : {{inst.c.id}}</p>
+        <p>Capacity: {{inst.capacity}}</p>
+        <p>Location: {{inst.gps}}</p>
+        <p>Status: {{inst.status}}</p>
+        <p>Efficiency: {{inst.efficiency}}%</p>
+        {% for s in solar %}
+        {% if s.inst.inst_id == inst.inst_id %}
+        <p>Humidity: {{s.humidity}}</p>
+        <p>Quanity of Panels: {{s.quantity_of_panels}}</p>
+        <p>Cloud Cover: {{s.cloud_cover}}</p>
+        {% endif %}
+        {% endfor %}
+
+        {% for w in wind %}
+        {% if w.inst.inst_id == inst.inst_id %}
+        <p>Rotor Radius: {{w.rotorradius}}</p>
+        <p>Blade Radius: {{w.blade}}</p>
+        <p>Wind Speed: {{w.windspeed}}</p>
+        {% endif %}
+        {% endfor %}
+
+        {% for t in tidal %}
+        {% if t.inst.inst_id == inst.inst_id %}
+        <p>Tidal Potential: {{t.tidalpotential}}</p>
+        <p>Dimension: {{t.dimension}}</p>
+        <p>Barrage Size: {{t.barragesize}}</p>
+        {% endif %}
+        {% endfor %}
+
+        {% for h in hydro %}
+        {% if h.inst.inst_id == inst.inst_id %}
+        <p>River: {{h.river}}</p>
+        <p>Height: {{h.height}}</p>
+        <p>Length: {{h.length}}</p>
+        <p>Dam Name: {{h.damname}}</p>
+        {% endif %}
+        {% endfor %}
+
+        {% for b in bio %}
+        {% if b.inst.inst_id == inst.inst_id %}
+        <p>Methane: {{b.methane}}</p>
+        <p>Conversion Method: {{b.conversionsethod}}</p>
+        {% endif %}
+        {% endfor %}
+
+        {% for g in geo %}
+        {% if g.inst.inst_id == inst.inst_id %}
+        <p>Flow Rate: {{g.flowrate}}</p>
+        <p>Internal Temperature: {{g.temp}}</p>
+        {% endif %}
+        {% endfor %}
+
+      </div>
+{% endfor %}
+</div>
+{% endblock content %}
+
+</body>
+</html>

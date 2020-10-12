@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+    <title>{% block title %}REM Add Installations{% endblock %}</title>
+</head>
+<body>
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("select").change(function(){
+        $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+            if(optionValue){
+                $(".box").not("." + optionValue).hide();
+                $("." + optionValue).show();
+            } else{
+                $(".box").hide();
+            }
+        });
+    }).change();
+});
+</script>
+<div style="display: block;margin-left:29%;margin-top:15%;opacity: 0.85;width: 100%;padding: 12px 20px;box-sizing: border-box;">
+    Choose the Installation:
+    <div>
+        <form action="addInst" method="POST">
+    <select name="types">
+    <option selected="selected" disabled>Choose the installation type</option>
+      <option value="solar">Solar</option>
+      <option value="wind">Wind</option>
+      <option value="hydro">Hydro</option>
+      <option value="tidal">Tidal</option>
+      <option value="bio">Biomass</option>
+      <option value="geo">Geothermal</option>
+    </select>
+</div>
+
+    <div class="solar box">You have selected <strong>Solar Installation</strong>
+        <br>
+       
+            {%csrf_token%}
+            <div class="container">
+        
+        Quanity of Panels <input type="text" name="qop"><br>
+        Humidity <input type="text" name="hum"><br>
+        Cloud Cover <input type="text" name="cc"><br>
+  
+</div>
+    </div>
+    <div class="wind box">You have selected <strong>Wind Installation</strong>
+        <br>
+       
+            {%csrf_token%}
+            <div class="container">
+       
+        Rotor Radius<input type="text" name="rr"><br>
+        Blade Radius<input type="text" name="br"><br>
+        Wind Speeed<input type="text" name="ws"><br>
+   
+</div>
+    </div>
+    <div class="tidal box">You have selected <strong>Tidal Installation</strong> 
+        <br>
+       
+            {%csrf_token%}
+            <div class="container">
+       
+        Tidal Potential <input type="text" name="tidalpot"><br>
+        Dimension <input type="text" name="dim"><br>
+        Barrage Size <input type="text" name="barragesize"><br>
+
+</div>
+    </div>
+
+    <div class="hydro box">You have selected <strong>Hydro Installation</strong>
+    <br>
+
+        {%csrf_token%}
+        <div class="container">
+        
+        River <input type="text" name="river"><br>
+        Dam Name <input type="text" name="damn"><br>
+        Height <input type="text" name="height"><br>
+        Length  <input type="text" name="length"><br>
+  
+</div>
+    </div>
+
+    <div class="bio box">You have selected <strong>Biomass Installation</strong>
+        <br>
+       
+            {%csrf_token%}
+            <div class="container">
+       
+        Methane <input type="text" name="methane"><br>
+        Conversion Method <input type="text" name="conme"><br>
+  
+</div>
+    </div>
+
+    <div class="geo box">You have selected <strong>Geothermal Installation</strong>
+        <br>
+        
+            {%csrf_token%}
+            <div class="container">
+        
+        Flow Rate <input type="text" name="flow"><br>
+        Internal temperature <input type="text" name="inttemp"><br>  
+     
+  
+</div>  
+
+    </div>
+    <div class="container">
+        Capacity <input type="text" name="cap"><br>
+        Efficiency <input type="text" name="eff"><br>
+        Location <input type="text" name="loc"><br>
+        Status <input type="text" name=status><br></div>
+    <input type="submit" value="Add">
+</form>
+
+</div>
+<div>
+    {% for message in messages%}
+    <h3>{{message}}</h3>
+    {%endfor%}
+</div>
+{% endblock content %}
+
+</body>
+</html>

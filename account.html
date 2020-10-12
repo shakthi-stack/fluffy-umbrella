@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>{% block title %}REM Account{% endblock %}</title>
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+          }
+          
+          .title {
+            color: grey;
+            font-size: 18px;
+          }
+ 
+    </style>
+</head>
+<body>
+
+{% block content %}
+
+<div class="card">
+ <h1>{{stake.fname}} {{stake.lname}}</h1>
+  <p class="title">Account ID : {{stake.id}}</p>
+  <p>{{stake.email}}</p>
+  <p>{{stake.city.city}}</p>
+  <p>{{stake.dob}}</p>
+  <p>{{client.account_type.account_type}}</p>
+</div>
+
+{% endblock content %}
